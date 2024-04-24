@@ -1,0 +1,25 @@
+# HSVP Spec
+
+## Hues
+[0, 60):        Red
+[60, 120):      Yellow
+[120, 180):     Green
+[181, 240):     Cyan
+[241, 300):     Blue
+[300, 360):     Magenta
+
+## Concepts
+There exist registers that keep track of program and memory.
+Memory size is the same as program size, and has the same dimension.
+
+## Instructions
+
+Red: Increment current register by S, advance V
+Yellow: Advance register by S, advance V
+Green: Rotate instruction clockwise by 90 degrees, increment register by S, advance V
+Cyan: Rotate register clockwise by 90 degrees, increment register by S, advance V
+Blue: Check register against S:
+    If S > register, rotate instruction counterclockwise by 90 degrees
+    If S < register, rotate instruction clockwise by 90 degrees
+    If S == register, do nothing
+Magenta: Output value at register, advance register by S, advance V
