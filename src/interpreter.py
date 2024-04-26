@@ -18,25 +18,25 @@ class Program:
             px, py = self.instruction_pointer
             color, S, V = self.instructions[px][py]
 
-            if color == 'R':
+            if color == 0: #red
                 self.memory[*self.register_pointer] = (self.memory[*self.register_pointer] + S) % 255
                 self.instruction_pointer = tupsum(self.instruction_pointer, tupprod(V, self.instruction_direction))
 
-            if color == 'Y':
+            if color == 1: #yellow
                 self.register_pointer = tupsum(self.register_pointer, tupprod(S, self.register_direction))
                 self.instruction_pointer = tupsum(self.instruction_pointer, tupprod(V, self.instruction_direction))
 
-            if color == 'G':
+            if color == 2: #green
                 idx, idy = self.instruction_direction
                 self.instruction_direction = (idy, -idx)
                 self.memory[*self.register_pointer] = (self.memory[*self.register_pointer] + S) % 255
                 self.instruction_pointer = tupsum(self.instruction_pointer, tupprod(V, self.instruction_direction))
 
-            if color == 'C':
+            if color == 3: #cyan
                 rdx, rdy = self.register_direction
                 self.register_direction = (rdy, -rdx)
 
-            if color == 'B':
+            if color == 4: #blue
                 idx, idy = self.instruction_direction
                 memory_value = self.memory[*self.register_pointer]
                 if memory_value < S:
@@ -45,7 +45,7 @@ class Program:
                     self.instruction_direction = (idy, -idx)
                 self.instruction_pointer = tupsum(self.instruction_pointer, tupprod(V, self.instruction_direction))
 
-            if color == 'M':
+            if color == 5: #magenta
                 memory_value = self.memory[*self.register_pointer]
                 yield memory_value
                 self.register_pointer = tupsum(self.register_pointer, tupprod(S, self.register_direction))
